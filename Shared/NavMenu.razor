@@ -1,0 +1,51 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">BlazorDarkMode</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="fetchdata">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </li>
+        <li class="nav-item px-3">
+            <button class="btn btn-primary " @onclick="@(_=>StateContainer.Property = "")">デフォルト</button>
+        </li>
+        <li class="nav-item px-3">
+            <button class="btn btn-primary dark-mode-blue" @onclick="@(_=>StateContainer.Property = "dark-mode-blue")">ダークブルー</button>
+        </li>
+        <li class="nav-item px-3">
+            <button class="btn btn-primary dark-mode-black" @onclick="@(_=>StateContainer.Property = "dark-mode-black")">ブラック</button>
+        </li>
+
+    </ul>
+</div>
+
+@code {
+
+    [Parameter]
+    public StateContainer StateContainer { get; set; }
+
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

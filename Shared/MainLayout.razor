@@ -1,0 +1,35 @@
+﻿@inherits LayoutComponentBase
+
+@implements IDisposable
+@inject StateContainer StateContainer
+
+<div class="page @(StateContainer.Property)">
+    <div class="sidebar">
+        <NavMenu StateContainer="StateContainer"/>
+    </div>
+
+    <div class="main">
+        <div class="top-row px-4">
+            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+        </div>
+
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        StateContainer.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        StateContainer.OnChange -= StateHasChanged;
+    }
+}
